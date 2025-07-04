@@ -11,5 +11,5 @@ ext fun raw_eprintln(line: String) = "
 
 pub ext fun panic[T](reason: String) -> T = "
     Error.stackTraceLimit = 100;
-    throw new Error(reason);
+    throw new Error(#var(reason));
 "

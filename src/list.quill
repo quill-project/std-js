@@ -10,7 +10,7 @@ pub ext fun List::concat[T](low: List[T], high: List[T]) -> mut List[T] = "
 "
 
 ext fun List::slice_unchecked[T](self: List[T], start: Int, end: Int) -> mut List[T] = "
-    return self.slice(Number(#var(start)), Number(#var(end)));
+    return #var(self).slice(Number(#var(start)), Number(#var(end)));
 "
 
 ext fun List::insert_unchecked[T](self: mut List[T], position: Int, value: T) = "
@@ -21,7 +21,7 @@ ext fun List::insert_unchecked[T](self: mut List[T], position: Int, value: T) = 
 "
 
 ext fun List::set_unchecked[T](self: mut List[T], position: Int, value: T) = "
-    self[Number(#var(position))] = #var(value);
+    #var(self)[Number(#var(position))] = #var(value);
 "
 
 pub ext fun List::length[T](self: List[T]) -> Int = "
