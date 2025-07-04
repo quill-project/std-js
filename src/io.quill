@@ -1,0 +1,15 @@
+
+mod std
+
+ext fun raw_println(line: String) = "
+    console.log(#var(line));
+"
+
+ext fun raw_eprintln(line: String) = "
+    console.error(#var(line));
+"
+
+pub ext fun panic[T](reason: String) -> T = "
+    Error.stackTraceLimit = 100;
+    throw new Error(reason);
+"

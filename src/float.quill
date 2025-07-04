@@ -1,0 +1,102 @@
+
+mod std
+
+pub ext fun Float::plus(lhs: Float, rhs: Float) -> Float = "
+    return #var(lhs) + #var(rhs);
+"
+
+pub ext fun Float::minus(lhs: Float, rhs: Float) -> Float = "
+    return #var(lhs) - #var(rhs);
+"
+
+pub ext fun Float::times(lhs: Float, rhs: Float) -> Float = "
+    return #var(lhs) * #var(rhs);
+"
+
+pub ext fun Float::div(lhs: Float, rhs: Float) -> Float = "
+    return #var(lhs) / #var(rhs);
+"
+
+pub ext fun Float::rem(lhs: Float, rhs: Float) -> Float = "
+    return fmod(#var(lhs), #var(rhs));
+"
+
+pub ext fun Float::lt(lhs: Float, rhs: Float) -> Bool = "
+    return #var(lhs) < #var(rhs);
+"
+
+pub ext fun Float::gt(lhs: Float, rhs: Float) -> Bool = "
+    return #var(lhs) > #var(rhs);
+"
+
+pub ext fun Float::lt_eq(lhs: Float, rhs: Float) -> Bool = "
+    return #var(lhs) <= #var(rhs);
+"
+
+pub ext fun Float::gt_eq(lhs: Float, rhs: Float) -> Bool = "
+    return #var(lhs) >= #var(rhs);
+"
+
+pub ext fun Float::eq(lhs: Float, rhs: Float) -> Bool = "
+    return #var(lhs) === #var(rhs);
+"
+
+pub ext fun Float::not_eq(lhs: Float, rhs: Float) -> Bool = "
+    return #var(lhs) !== #var(rhs);
+"
+
+pub ext fun Float::u_minus(x: Float) -> Float = "
+    return -(#var(x));
+"
+
+pub ext fun Float::as_string(self: Float) -> String = "
+    if(Number.isFinite(#var(self))) { return '' + #var(self); }
+    if(Number.isNaN(#var(self))) { return 'nan'; }
+    if(#var(self) === Infinity) { return 'inf'; }
+    if(#var(self) === -Infinity) { return '-inf'; }
+    return '<failed to display>';
+"
+
+pub ext fun Float::as_int(self: Float) -> Int = "
+    return BigInt(Math.trunc(#var(self)));
+"
+
+
+pub ext fun Float::is_nan(self: Float) -> Bool = "return Number.isNaN(#var(self));"
+pub ext fun Float::is_finite(self: Float) -> Bool = "return Number.isFinite(#var(self));"
+pub ext fun Float::is_infinite(self: Float) -> Bool = "
+    if(#var(self) === Infinity || #var(self) === -Infinity) { return true; }
+    return false;
+"
+pub ext fun Float::acos(self: Float) -> Float = "return Math.acos(#var(self));"
+pub ext fun Float::acosh(self: Float) -> Float = "return Math.acosh(#var(self));"
+pub ext fun Float::asin(self: Float) -> Float = "return Math.asin(#var(self));"
+pub ext fun Float::asinh(self: Float) -> Float = "return Math.asinh(#var(self));"
+pub ext fun Float::atan(self: Float) -> Float = "return Math.atan(#var(self));"
+pub ext fun Float::atan2(x: Float, y: Float) -> Float 
+    = "return Math.atan2(#var(x), #var(y));"
+pub ext fun Float::atanh(self: Float) -> Float = "return Math.atanh(#var(self));"
+pub ext fun Float::cbrt(self: Float) -> Float = "return Math.cbrt(#var(self));"
+pub ext fun Float::ceil(self: Float) -> Float = "return Math.ceil(#var(self));"
+pub ext fun Float::cos(self: Float) -> Float = "return Math.cos(#var(self));"
+pub ext fun Float::cosh(self: Float) -> Float = "return Math.cosh(#var(self));"
+pub ext fun Float::exp(self: Float) -> Float = "return Math.exp(#var(self));"
+pub ext fun Float::expm1(self: Float) -> Float = "return Math.expm1(#var(self));"
+pub ext fun Float::floor(self: Float) -> Float = "return Math.floor(#var(self));"
+pub ext fun Float::hypot(a: Float, b: Float) -> Float
+    = "return Math.hypot(#var(a), #var(b));"
+pub ext fun Float::log(self: Float) -> Float = "return Math.log(#var(self));"
+pub ext fun Float::log10(self: Float) -> Float = "return Math.log10(#var(self));"
+pub ext fun Float::log1p(self: Float) -> Float = "return Math.log1p(#var(self));"
+pub ext fun Float::log2(self: Float) -> Float = "return Math.log2(#var(self));"
+pub ext fun Float::powi(self: Float, n: Int) -> Float 
+    = "return Math.pow(#var(self), Number(#var(n)));"
+pub ext fun Float::powf(self: Float, n: Float) -> Float 
+    = "return Math.pow(#var(self), #var(n));"
+pub ext fun Float::round(self: Float) -> Float = "return Math.round(#var(self));"
+pub ext fun Float::sin(self: Float) -> Float = "return Math.sin(#var(self));"
+pub ext fun Float::sinh(self: Float) -> Float = "return Math.sinh(#var(self));"
+pub ext fun Float::sqrt(self: Float) -> Float = "return Math.sqrt(#var(self));"
+pub ext fun Float::tan(self: Float) -> Float = "return Math.tan(#var(self));"
+pub ext fun Float::tanh(self: Float) -> Float = "return Math.tanh(#var(self));"
+pub ext fun Float::trunc(self: Float) -> Float = "return Math.trunc(#var(self));"

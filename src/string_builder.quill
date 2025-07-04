@@ -1,0 +1,37 @@
+
+mod std
+
+pub ext fun StringBuilder::empty() -> mut StringBuilder = "
+    return { content: \"\" };
+"
+
+pub ext fun StringBuilder::set_capacity(self: mut StringBuilder, capacity: Int) = "
+    // JS impl does not have a capacity
+"
+
+ext fun StringBuilder::insert_unchecked(self: mut StringBuilder, position: Int, value: String) = "
+    #var(self).content = #var(self).content.substring(0, #var(position))
+        + #var(value)
+        + #var(self).content.substring(#var(position));
+"
+
+pub ext fun StringBuilder::push(self: mut StringBuilder, value: String) = "
+    #var(self).content += #var(value);
+"
+
+ext fun StringBuilder::as_string_ref(self: StringBuilder) -> String = "
+    return #var(self).content;
+"
+
+ext fun StringBuilder::splice_unchecked(self: mut StringBuilder, start: Int, end: Int) -> String = "
+    const removed = #var(self).content.substring(#var(start), #var(end));
+    #var(self).content = #var(self).content.substring(0, #var(start))
+        + #var(self).content.substring(#var(end));
+    return removed;
+"
+
+ext fun StringBuilder::splice_from_unchecked(self: mut StringBuilder, start: Int) -> String = "
+    const removed = #var(self).content.substring(#var(start));
+    #var(self).content = #var(self).content.substring(0, #var(start));
+    return removed;
+"

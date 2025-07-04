@@ -1,0 +1,10 @@
+{
+    "name": "std-js",
+    "authors": ["schwalbe_t"],
+    "description": "Implements the Quill standard library for the JS backend.",
+    "type": "library",
+    "backend": "js",
+    "dependencies": [
+        "https://github.com/quill-project/std"
+    ]
+}

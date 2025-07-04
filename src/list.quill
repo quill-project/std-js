@@ -1,0 +1,41 @@
+
+mod std
+
+pub ext fun List::of_length[T](length: Int, value: T) -> mut List[T] = "
+    return new Array(Number(#var(length))).fill(#var(value));
+"
+
+pub ext fun List::concat[T](low: List[T], high: List[T]) -> mut List[T] = "
+    return [...#var(low), ...#var(high)];
+"
+
+ext fun List::slice_unchecked[T](self: List[T], start: Int, end: Int) -> mut List[T] = "
+    return self.slice(Number(#var(start)), Number(#var(end)));
+"
+
+ext fun List::insert_unchecked[T](self: mut List[T], position: Int, value: T) = "
+    const n = Number(#var(position));
+    #var(self).push(#var(value));
+    #var(self).copyWithin(n + 1, n, #var(self).length - 1);
+    #var(self)[n] = #var(value);
+"
+
+ext fun List::set_unchecked[T](self: mut List[T], position: Int, value: T) = "
+    self[Number(#var(position))] = #var(value);
+"
+
+pub ext fun List::length[T](self: List[T]) -> Int = "
+    return BigInt(#var(self).length);
+"
+
+ext fun List::get_unchecked[T](self: List[T], position: Int) -> T = "
+    return #var(self)[Number(#var(position))];
+"
+
+ext fun List::splice_unchecked[T](self: mut List[T], start: Int, end: Int) -> mut List[T] = "
+    return #var(self).splice(Number(#var(start)), Number(#var(end) - #var(start)));
+"
+
+ext fun List::destruct[T](self: mut List[T]) = "
+    // nothing to do in JS
+"
