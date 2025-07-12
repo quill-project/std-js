@@ -6,7 +6,7 @@ mod std
 /// would by the best choice here, but testing showed that it breaks stuff
 /// on a few specific versions of Firefox, so this is the best we can do.
 ext fun Int::as_int_64(self: Int) -> Int = "
-    return #var(self) % (2n ** 64n);
+    return #var(self) % (2n ** 63n);
 "
 
 pub ext fun Int::plus(lhs: Int, rhs: Int) -> Int = "
