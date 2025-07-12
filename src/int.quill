@@ -1,30 +1,35 @@
 
 mod std
 
+/// This is a dirty dirty hack. Integers in Quill are supposed to behave like
+/// signed 64 bit integers, but in this case they don't. 'BigInt.asIntN'
+/// would by the best choice here, but testing showed that it breaks stuff
+/// on a few specific versions of Firefox, so this is the best we can do.
+ext fun Int::as_int_64(self: Int) -> Int = "
+    return #var(self) % (2n ** 64n);
+"
+
 pub ext fun Int::plus(lhs: Int, rhs: Int) -> Int = "
-    return BigInt.asIntN(64, #var(lhs) + #var(rhs));
+    return #fun(Int::as_int_64)(#var(lhs) + #var(rhs));
 "
 
 pub ext fun Int::minus(lhs: Int, rhs: Int) -> Int = "
-    return BigInt.asIntN(64, #var(lhs) - #var(rhs));
+    return #fun(Int::as_int_64)(#var(lhs) - #var(rhs));
 "
 
 pub ext fun Int::times(lhs: Int, rhs: Int) -> Int = "
-    return BigInt.asIntN(64, #var(lhs) * #var(rhs));
+    return #fun(Int::as_int_64)(#var(lhs) * #var(rhs));
 "
 
 pub ext fun Int::div(lhs: Int, rhs: Int) -> Int = "
-    if(#var(rhs) === 0n) { 
-        #fun(panic[Unit])(\"Integer division by zero\")
-    }
-    return BigInt.asIntN(64, #var(lhs) / #var(rhs));
+    return #fun(Int::as_int_64)(#var(lhs) / #var(rhs));
 "
 
 pub ext fun Int::rem(lhs: Int, rhs: Int) -> Int = "
     if(#var(rhs) === 0n) { 
         #fun(panic[Unit])(\"Integer division by zero\")
     }
-    return BigInt.asIntN(64, #var(lhs) % #var(rhs));
+    return #fun(Int::as_int_64)(#var(lhs) % #var(rhs));
 "
 
 pub ext fun Int::lt(lhs: Int, rhs: Int) -> Bool = "
@@ -52,7 +57,7 @@ pub ext fun Int::not_eq(lhs: Int, rhs: Int) -> Bool = "
 "
 
 pub ext fun Int::u_minus(x: Int) -> Int = "
-    return -(#var(x));
+    return #fun(Int::as_int_64)(-(#var(x)));
 "
 
 pub ext fun Int::as_string(self: Int) -> String = "
