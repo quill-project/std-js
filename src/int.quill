@@ -1,12 +1,8 @@
 
 mod std
 
-/// This is a dirty dirty hack. Integers in Quill are supposed to behave like
-/// signed 64 bit integers, but in this case they don't. 'BigInt.asIntN'
-/// would by the best choice here, but testing showed that it breaks stuff
-/// on a few specific versions of Firefox, so this is the best we can do.
 ext fun Int::as_int_64(self: Int) -> Int = "
-    return #var(self) % (2n ** 63n);
+    return BigInt.asIntN(64, #var(self));
 "
 
 pub ext fun Int::plus(lhs: Int, rhs: Int) -> Int = "
